@@ -1,0 +1,9 @@
+.Login {
+  background-color: #f0f0f0;
+  color: red;
+}
+
+.Login .content {
+  margin: 10px;
+  padding-bottom: 20px;
+}

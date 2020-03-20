@@ -1,0 +1,23 @@
+{
+  "name": "flaky.dev-server",
+  "version": "1.0.0",
+  "description": "flaky.dev server",
+  "main": "index.js",
+  "scripts": {
+    "test": "c8 mocha test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/bcoe/flaky.dev.git"
+  },
+  "keywords": [
+    "flkay",
+    "dev"
+  ],
+  "author": "Ben Coe <bencoe@gmail.com>",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/bcoe/flaky.dev/issues"
+  },
+  "homepage": "https://github.com/bcoe/flaky.dev#readme"
+}
