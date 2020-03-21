@@ -1,17 +1,39 @@
+import './css/login.css';
+
 import React from 'react';
-import Notification from './Notification';
+import Button from 'react-bootstrap/Button';
 
-import './css/Login.css';
+class Login extends React.Component {
+	constructor(props) {
+		super(props);
+		// eslint-disable-next-line react/state-in-constructor
+		this.state = {
+			loading: true
+		};
+		this.handleClick = this.handleClick.bind(this);
+		setTimeout(() => {
+			this.setState({
+				loading: false
+			});
+		}, 2000);
+	}
 
-function Login() {
-  return (
-    <div className="Login">
-      <Notification />
-      <div className="content">
-        This is the content of my login screen.
-      </div>
-    </div>
-  );
+	handleClick() {
+		console.info('I am clicked');
+	}
+
+	render() {
+		return (
+			<Button
+				block
+				variant="primary"
+				disabled={this.state.loading}
+				onClick={this.state.loading ? null : this.handleClick}
+			>
+				{this.state.loading ? 'Loading…' : 'Login with GitHub'}
+			</Button>
+		);
+	}
 }
 
 export default Login;

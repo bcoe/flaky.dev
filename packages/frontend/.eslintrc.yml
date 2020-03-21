@@ -1,0 +1,6 @@
+---
+extends:
+  - xo-react
+rules:
+  import/no-unassigned-import: warn
+  import/extensions: warn
