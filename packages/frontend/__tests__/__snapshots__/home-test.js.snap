@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders home screen with login button 1`] = `
+<div
+  className="container-fluid"
+>
+  <div
+    className="row"
+  >
+    <div
+      className="col"
+    >
+      <div
+        className="fade alert alert-success show"
+        role="alert"
+      >
+        <div
+          className="alert-heading h4"
+        >
+          Welcome to flaky.dev
+        </div>
+        <p>
+          Flaky.dev accepts output from your test runs on GitHub, performs statistical analysis, and opens and closes issues for flaky tests.
+        </p>
+        <hr />
+        <p
+          className="mb-0"
+        >
+          Login with GitHub below to get started.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div
+    className="row"
+  >
+    <div
+      className="col"
+    />
+    <div
+      className="col"
+    >
+      <button
+        className="btn btn-primary btn-block"
+        disabled={true}
+        onClick={null}
+        type="button"
+      >
+        Loading…
+      </button>
+    </div>
+    <div
+      className="col"
+    />
+  </div>
+</div>
+`;
