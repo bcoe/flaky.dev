@@ -17,7 +17,7 @@ class BaseLoginCallback extends React.Component {
 
 	render() {
 		return (
-			<b>Hello World!</b>
+			<b>...redirecting</b>
 		);
 	}
 }

@@ -14,7 +14,9 @@ class Login extends React.Component {
 	}
 
 	async componentDidMount() {
-		const resp = await fetch(`${API_URL}/login/github`)
+		const resp = await fetch(`${API_URL}/login/github`, {
+			credentials: 'include'
+		})
 			.then(_resp => {
 				return _resp.json();
 			});
