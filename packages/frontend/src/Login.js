@@ -1,25 +1,27 @@
 import './css/login.css';
-
+import * as fetch from 'node-fetch';
 import React from 'react';
 import Button from 'react-bootstrap/Button';
+
+const API_URL = process.env.REACT_APP_API_URL;
 
 class Login extends React.Component {
 	constructor(props) {
 		super(props);
-		// eslint-disable-next-line react/state-in-constructor
 		this.state = {
 			loading: true
 		};
-		this.handleClick = this.handleClick.bind(this);
-		setTimeout(() => {
-			this.setState({
-				loading: false
-			});
-		}, 2000);
 	}
 
-	handleClick() {
-		console.info('I am clicked');
+	async componentDidMount() {
+		const resp = await fetch(`${API_URL}/login/github`)
+			.then(_resp => {
+				return _resp.json();
+			});
+		this.setState({
+			loading: false,
+			authorizationUri: resp.authorization_uri
+		});
 	}
 
 	render() {
@@ -27,8 +29,8 @@ class Login extends React.Component {
 			<Button
 				block
 				variant="primary"
+				href={this.state.authorizationUri}
 				disabled={this.state.loading}
-				onClick={this.state.loading ? null : this.handleClick}
 			>
 				{this.state.loading ? 'Loading…' : 'Login with GitHub'}
 			</Button>
