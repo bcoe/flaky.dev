@@ -43,7 +43,6 @@ exports[`renders home screen with login button 1`] = `
       <button
         className="btn btn-primary btn-block"
         disabled={true}
-        onClick={null}
         type="button"
       >
         Loading…
