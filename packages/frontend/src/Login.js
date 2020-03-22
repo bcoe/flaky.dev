@@ -15,14 +15,13 @@ class Login extends React.Component {
 
 	async componentDidMount() {
 		const resp = await fetch(`${API_URL}/login/github`, {
-			credentials: 'include'
-		})
-			.then(_resp => {
-				return _resp.json();
-			});
+			credentials: 'include',
+			cache: 'no-cache'
+		});
+		const body = await resp.json();
 		this.setState({
 			loading: false,
-			authorizationUri: resp.authorization_uri
+			authorizationUri: body.authorization_uri
 		});
 	}
 

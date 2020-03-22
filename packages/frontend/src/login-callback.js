@@ -1,18 +1,33 @@
 import './css/login.css';
-// Import * as fetch from 'node-fetch';
+import * as fetch from 'node-fetch';
 import React from 'react';
 import {__RouterContext} from 'react-router';
 import {UserContext} from './user-context';
-// TODO: add prop types.
+
+const API_URL = process.env.REACT_APP_API_URL;
 
 class BaseLoginCallback extends React.Component {
 	async componentDidMount() {
-		this.props.setUser({
-			authenticated: true
+		const parameters = new URLSearchParams(this.props.router.location.search);
+		const resp = await fetch(`${API_URL}/login/github`, {
+			method: 'POST',
+			credentials: 'include',
+			cache: 'no-cache',
+			headers: {
+				'Content-Type': 'text/plain'
+			},
+			body: JSON.stringify({
+				code: parameters.get('code'),
+				state: parameters.get('state')
+			})
 		});
-		setTimeout(() => {
+		if (resp.status === 200) {
+			const user = await resp.json();
+			this.props.setUser(user);
 			this.props.router.history.push('/account');
-		}, 1000);
+		} else {
+			this.props.router.history.push('/');
+		}
 	}
 
 	render() {

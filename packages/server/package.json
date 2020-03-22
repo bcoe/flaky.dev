@@ -7,7 +7,10 @@
     "test": "c8 mocha test.js",
     "start": "node index.js",
     "lint": "xo",
-    "fix": "xo --fix"
+    "fix": "xo --fix",
+    "migrate:create": "db-migrate create --config=./database.js",
+    "migrate:up": "db-migrate up --config=./database.js",
+    "migrate:down": "NODE_ENV=development db-migrate down --config=./database.js"
   },
   "repository": {
     "type": "git",
@@ -24,7 +27,9 @@
   },
   "homepage": "https://github.com/bcoe/flaky.dev#readme",
   "dependencies": {
+    "@octokit/rest": "^17.1.1",
     "body-parser": "^1.19.0",
+    "connect-pg-simple": "^6.1.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
@@ -32,6 +37,9 @@
     "uuid": "^7.0.2"
   },
   "devDependencies": {
+    "db-migrate": "^0.11.6",
+    "db-migrate-pg": "^1.0.0",
+    "pg": "^7.18.2",
     "xo": "^0.28.0"
   },
   "xo": {

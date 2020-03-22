@@ -1,0 +1,546 @@
+\d
+\d customers;
+insert into customers(name) values('ben')
+;
+insert into customers(name) values('ben');
+insert into customers(name) values('ben');
+insert into customers(name) values('ben');
+insert into customers(name) values('ben');
+\d
+select * from customers;
+insert into customers(name, npm_user) values('ben', 'bob');
+insert into customers(name, npm_user) values('ben', 'bob');
+insert into customers(name, npm_user) values('ben', 'bob');
+\d
+\d users
+\d users;
+\d customers;
+\d customers;
+\d customers;
+\d customers;
+\d customers;
+\q
+\d
+\d licenses;
+\d plans;
+\d plans;
+\q
+select * from licenses;
+\q
+\q
+\d
+\d sponsorships;
+insert into sponsorships(npm_user) VALUES('bcoe')
+;
+insert into sponsorships(npm_user) VALUES('bcoe');
+insert into sponsorships(npm_user) VALUES('bcoe');
+insert into sponsorships(npm_user) VALUES('bcoe');
+insert into sponsorships(npm_user) VALUES('bcoe');
+insert into sponsorships(npm_user) VALUES('bcoe');
+\d customers;
+\d sponsorships;
+\q
+\d customers;
+;
+insert into customers(npm_user) values ('bob');
+insert into customers(npm_user) values ('bob');
+\q
+\d
+\d customers;
+\d sponsorships;
+\q
+\d
+select * from users;
+select * from users where name = 'user_1';
+select * from users where name = 'user_1';
+\d
+select * from user_org;
+\q
+\d
+select * from licenses;
+select npm-org from licenses;
+\q
+\d
+\d teams;
+\q
+\d package;
+\d packages;
+\d teams;
+ls
+\d
+\d package_team;
+\d package_team;
+\d package
+\d packages;
+\d scopes
+\d scopes
+\d packages;
+\q
+select * from scopes;
+\q
+\d
+\d licenses;
+select * from plans;
+\q
+\d
+select * from plans;
+select * from licenses;
+\q
+select * from licenses;
+select * from plans;
+\q
+\d
+\d
+\q
+\d
+\q
+\d
+select count(*) from customers;
+select count(*) from licenses;
+\q
+\d
+show all
+;
+\q
+\d
+select * from dependents_aggregate;
+select * from dependents_aggregate;
+select * from dependents_aggregate;
+select * from dependents_aggregate;
+select * from packages;
+\q
+BEGIN;
+  DELETE FROM dependents_aggregate;
+  INSERT INTO dependents_aggregate
+    SELECT packages.id, count(*) FROM packages
+      INNER JOIN version_dependencies ON version_dependencies.name = packages.name
+      INNER JOIN dist_tags ON dist_tags.version_id = version_dependencies.version_id
+      WHERE
+        packages.deleted IS NULL AND
+        dist_tags.tag = 'latest' AND dist_tags.deleted IS NULL AND
+        version_dependencies.type = 'dependency'
+      GROUP BY packages.id ORDER BY count DESC;
+COMMIT;
+select * from packages;
+select * from dependents_aggregate;
+select * from dependents_aggregate;
+\q
+\d
+select * from dependents_aggregate;
+select * from dependents_aggregate;
+delete from depenednets_aggregate;
+delete from dependents_aggregate
+;
+select * from dependents_aggregate;
+select * from dependents_aggregate;
+select * from dependents_aggregate;
+select * from dependents_aggregate;
+\q
+\q
+\d
+delete from dist_tags;
+\q
+select * from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select * from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select * from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select packages.* from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select distinct packages.*, package_team.* from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select distinct packages.*, package_team.* from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select distinct packages.*, package_team.* from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select distinct packages.* from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select distinct packages.*, package_team.permissions from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select distinct packages.*, package_team.permissions from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select distinct packages.*, package_team.permissions from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select distinct packages.name, package_team.permissions from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select distinct packages.name, packages.*, package_team.permissions from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select distinct packages.name left join "package_team" on "packages"."id" = "package_team"."package_id";
+select distinct packages.name left join "package_team" on "packages"."id" = "package_team"."package_id";
+select distinct packages.name from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select distinct packages.name, packages.* from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select distinct packages.name, packages.*, package_team.* from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select distinct packages.name, packages.* from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select packages.name, packages.* from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select distinct packages.name, packages.* from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select distinct packages.name, packages.* from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select distinct packages.name, packages.*,package_team.permissions from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select distinct(packages.name), packages.* from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select distinct(packages.name), packages.* from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select distinct(packages.name), packages.*, pack_team.* from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select distinct(packages.name), packages.*, pack_teams.* from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select distinct(packages.name), packages.*, package_team.* from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select distinct(packages.name), packages.* from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select distinct(packages.name), packages.* from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select * package_team.* from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select * from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select * from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY package_id;
+select * from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY package_id;
+select * from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select * from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select * from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY package_id;
+select * from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUPBY package_id;
+select * from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY packages.package_id;
+select * from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY packages.id;
+select * from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY id;
+select * from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY packages.id;
+select * from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY packages.id, package_team.package_id;
+select * from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY package_team.package_id;
+select * from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY packages.id;
+select * from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP PG "packages"."id";
+select * from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY "packages"."id";
+select packages.* from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY "packages"."id";
+select packages.* from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY "packages"."id";
+select packages.* from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select packages.* from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY "packages"."id";
+select packages.* from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY "packages"."id";
+select packages.* from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY "packages"."id";
+select packages.*,package_team.* from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY "packages"."id";
+select packages.*,package_team.permissions from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY "packages"."id";
+select packages.* from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY "packages"."id";
+select * from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY "packages"."id";
+select * from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY "packages"."id", "package_team"."package_id";
+select * from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY "packages"."id";
+select * from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY "packages"."id";
+select * from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY "packages"."id", "package_team"."package_id";
+select * from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY "packages"."id";
+select * from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY "packages"."id";
+select * from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY "packages"."id";
+select * from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY "packages"."id";
+select distinct package_id from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select distinct package_id from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select distinct package_id from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select distinct package_id from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select distinct package_id from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select distinct package_id from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select distinct package_id, package_team.id from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select distinct package_id, package_team.id from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select * from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select * from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY "package"."id";
+select * from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY "package"."id";
+select * from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id";
+select * from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY packages.id;
+select packages.* from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY packages.id;
+select packages.*, array_agg(package_team.*) from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY packages.id;
+select packages.*, array_agg(package_team.*) from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY packages.id;
+select packages.*, array_agg(package_team.*) from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY packages.id;
+select packages.*, array_agg(package_team.*) from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY packages.id;
+select packages.*, array_agg(package_team.*) from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY packages.id;
+select packages.*, array_agg(package_team.*) from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY packages.id;
+select packages.*, array_agg(package_team.*) from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY packages.id;
+select packages.*, array_agg(package_team.*) from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY packages.id;
+select packages.*, array_agg(package_team.*) from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY packages.id;
+select packages.*, array_agg(package_team.*) from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" GROUP BY packages.id;
+\q
+select "packages".*, "array_agg(package_team"."*)" from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" group by "packages"."id";
+select "packages".*, array_agg(package_team.*) from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" group by "packages"."id";
+\q
+select "packages"."*" array_agg("package_team"."*") from "packages" left join "package_team" on "packages"."id" = "package_team"."package_id" group by "packages"."id";
+\q
+SELECT count(distinct(*)) select * from users;
+SELECT count(distinct(id)) select * from users;
+\q
+\q
+select foo.*, json_agg(join_me.*) from "foo" left join "join_me" on "foo"."name" = "join_me"."foo_name" where "foo_name" = ? and "foo"."deleted" is null group by "foo"."name" order by "permissions" asc limit ?
+;
+select foo.*, json_agg(join_me.*) from "foo" left join "join_me" on "foo"."name" = "join_me"."foo_name" where and "foo"."deleted" is null group by "foo"."name" order by "permissions";
+select foo.*, json_agg(join_me.*) from "foo" left join "join_me" on "foo"."name" = "join_me"."foo_name" where "foo"."deleted" is null group by "foo"."name" order by "permissions";
+select * from "foo" left join "join_me" on "foo"."name" = "join_me"."foo_name" where "foo"."deleted" is null group by "foo"."name" order by "permissions";
+select foo.*, json_agg(join_me.*) from "foo" left join "join_me" on "foo"."name" = "join_me"."foo_name" where "foo"."deleted" is null group by "foo"."name" order by "join_me"."permissions";
+select foo.*, json_agg(join_me.*) from "foo" left join "join_me" on "foo"."name" = "join_me"."foo_name" where "foo"."deleted" is null group by "foo"."name" order by "join_me"."permissions", "foo"."id";
+select foo.*, json_agg(join_me.*) from "foo" left join "join_me" on "foo"."name" = "join_me"."foo_name" where "foo"."deleted" is null group by "foo"."name" order by "join_me"."permissions", "foo"."id";
+select foo.*, json_agg(join_me.*) from "foo" left join "join_me" on "foo"."name" = "join_me"."foo_name" where "foo"."deleted" is null group by "foo"."name" order by "join_me"."permissions", "foo"."id";
+select foo.*, json_agg(join_me.*) from "foo" left join "join_me" on "foo"."name" = "join_me"."foo_name" where "foo"."deleted" is null group by "join_me"."name";
+select foo.*, json_agg(join_me.*) from "foo" left join "join_me" on "foo"."name" = "join_me"."foo_name" where "foo"."deleted" is null group by "foo"."id";
+select foo.*, json_agg(join_me.*) from "foo" left join "join_me" on "foo"."name" = "join_me"."foo_name" where "foo"."deleted" is null group by "foo"."id";
+select foo.*, json_agg(join_me.*) from "foo" left join "join_me" on "foo"."name" = "join_me"."foo_name" where "foo"."deleted" is null group by "foo"."id";
+select foo.*, json_agg(join_me.*) from "foo" left join "join_me" on "foo"."name" = "join_me"."foo_name" where "foo"."deleted" is null group by "foo"."id";
+\q
+select foo.*, json_agg(join_me.*) from "foo" left join "join_me" on "foo"."name" = "join_me"."foo_name" where "foo"."deleted" is null group by "foo"."id";
+select foo.*, json_agg(join_me.*) from "foo" left join "join_me" on "foo"."name" = "join_me"."foo_name" where "foo"."deleted" is null group by "foo"."id";
+select foo.*, json_agg(join_me.*) from "foo" left join "join_me" on "foo"."name" = "join_me"."foo_name" where "foo"."deleted" is null group by "foo"."id";
+select foo.*, json_agg(join_me.*) from "foo" left join "join_me" on "foo"."name" = "join_me"."foo_name" where "foo"."deleted" is null group by "foo"."id";
+\q
+\d
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+select count(*) from packages;
+\q
+keys
+keys
+CREATE TABLE mytable ( 
+  id SERIAL PRIMARY KEY,
+  geom GEOMETRY(Point, 26910),
+  name VARCHAR(128)
+); 
+CREATE TABLE mytable ( 
+  id SERIAL PRIMARY KEY,
+  geom GEOMETRY(Point, 26910),
+  name VARCHAR(128)
+); 
+CREATE TABLE mytable ( 
+  id SERIAL PRIMARY KEY,
+  geom GEOMETRY(Point, 26910),
+  name VARCHAR(128)
+); 
+ALTER EXTENSION postgis 
+ UPDATE TO "2.2.1";
+CREATE EXTENSION postgis
+;
+exit
+\q
+\d
+select * rom foo;
+select * from foo;
+\q
+\d
+\d climbers
+\d climbers
+insert into climbers(name, email) VALUES ('ben coe', 'ben@npmjs.com')
+;
+\d
+select * from climbers;
+delete * from climbers;
+delete from climbers;
+\q
+\d
+INSERT INTO climbers(name, email) VALUES('ben', 'ben@npmjs.com');
+INSERT INTO climbers(name, email) VALUES('ben', 'ben@npmjs.com');
+\d
+\d
+\q
+\d
+\q
+\d
+CREATE DATABASE oauth2_server
+;
+CREATE DATABASE oauth2_server
+;
+exit
+\q
+exit
+\q
+\d
+drop database oauth2_server;
+drop database oauth2_server;
+\q
+\q
+\q
+\q
+\q
+drop database oauth2_server;
+drop database oauth2_server;
+\q
+\d
+exit
+\q
+ls
+\q
+\d
+\d clients;
+\d clients;
+\d clients;
+\d clients;
+\d clients;
+\d clients;
+\d clients;
+\d clients;
+\d clients;
+\d clients;
+\d clients;
+\d clients;
+\q
+\d
+\q
+\q
+\d
+\d
+\d
+select * from clients;
+select * from tokens;
+select * from tokens;
+select * from tokens;
+select * from tokens;
+\q
+select * from tokens;
+select * from tokens;
+\q
+\d
+select * from tokens
+;
+select * from tokens
+;
+\q
+\d
+\d tokens
+select * from tokens;
+\q
+\d
+select * from clients;
+select * from tokens;
+\q
+ROLLBACK
+\q
+BEGIN
+SELECT * FROM batman;
+\d
+select * from tokens;
+BEGIN
+;
+BEGIN
+;
+BEGIN
+;
+INSERT into tokens(access_token) VALUES ('batman')
+;
+SELECT * from batman;
+BEGIN
+;
+END;
+\q
+\d
+select * from tokens;
+select * from clients;
+\q
+\d
+select * from tokens;
+select * from clients;
+\q
+\q
+\d
+\d
+\q
+\q
+\q
+CREATE DATABASE falky_dev_development
+;
+\d
+\t
+\d
+select * from falky_dev_development
+;
+\d falky_dev_development;
+CREATE DATABASE falky_dev_development;
+\q
+\d
+\d user;
+describe falky_dev_development;
+\d falky_dev_development;
+show database falky_dev_development;
+show database flaky_dev_development;
+\l;
+\l
+drop database falky_dev_development;
+create database flaky_dev_development;
+\q
+\q
+\d
+\d
+\d
+\q
+\q
+\q
+\q
+\d
+select * from users_github;
+select * from users_github;
+select * from users_github;
+select * from users_github;
+select * from users_github;
+select * from users_github;
+\d
+select * from migrations;
+\q
+\d
+\d users_github;
+INSERT INTO flaky_dev_development(email) VALUES('bencoe@gmail.com');
+INSERT INTO github_users(email) VALUES('bencoe@gmail.com');
+INSERT INTO users_github(email) VALUES('bencoe@gmail.com');
+INSERT INTO users_github(github_login, email) VALUES('bcoe', 'bencoe@gmail.com');
+INSERT INTO users_github(github_login, email) VALUES('emily', 'emily@gmail.com');
+\d
+select * from users_github;
+\q
+\d
+\d users_github;
+\q
+select * from users_github;
+\q
+\d
+\q
+select * from users_github;
+select * from sessions;
+select * from session;
+select * from session;
+select * from session;
+select * from session;
+select * from session;
+select * from session;
+select * from session;
+select COUNT(*) from session;
+select COUNT(*) from session;
+select COUNT(*) from session;
+select COUNT(*) from session;
+select COUNT(*) from session;
+select COUNT(*) from session;
+select COUNT(*) from session;
+select COUNT(*) from session;
+select COUNT(*) from session;
+select COUNT(*) from session;
+select COUNT(*) from session;
+select COUNT(*) from session;
+select COUNT(*) from session;
+select COUNT(*) from session;
+select COUNT(*) from session;
+select COUNT(*) from session;
+select COUNT(*) from session;
+select COUNT(*) from session;
+select * from session;
+select * from session;
+select * from session;
+select * from session;
+select * from session;
+select * from users;
+select * from user;
+select * from user;
+\s user;

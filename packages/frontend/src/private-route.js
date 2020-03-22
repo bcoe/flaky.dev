@@ -1,10 +1,13 @@
 import React from 'react';
 import {UserContext} from './user-context';
+import * as fetch from 'node-fetch';
 import {__RouterContext} from 'react-router';
 import {
 	Route,
 	Redirect
 } from 'react-router-dom';
+
+const API_URL = process.env.REACT_APP_API_URL;
 
 class BasePrivateRoute extends Route {
 	constructor(props) {
@@ -12,13 +15,22 @@ class BasePrivateRoute extends Route {
 		this.state = {
 			loading: true
 		};
-		setTimeout(() => {
+	}
+
+	async componentDidMount() {
+		const resp = await fetch(`${API_URL}/user`, {
+			credentials: 'include',
+			cache: 'no-cache'
+		});
+		if (resp.status === 200) {
+			const user = await resp.json();
+			this.props.setUser(user);
 			this.setState(() => {
 				return {
 					loading: false
 				};
 			});
-		}, 1000);
+		}
 	}
 
 	render() {
@@ -31,7 +43,7 @@ class BasePrivateRoute extends Route {
 		const {user} = this.props;
 		const {match} = this.props.router;
 		if (match) {
-			if (user.authenticated) {
+			if (user.login) {
 				return super.render();
 			}
 
@@ -48,8 +60,8 @@ const PrivateRoute = ({component: Component, ...rest}) => (
 	<__RouterContext.Consumer>
 		{router => (
 			<UserContext.Consumer>
-				{({user}) =>
-					<BasePrivateRoute {...rest} user={user} router={router}/>}
+				{({user, setUser}) =>
+					<BasePrivateRoute {...rest} user={user} setUser={setUser} router={router}/>}
 			</UserContext.Consumer>
 		)}
 	</__RouterContext.Consumer>
