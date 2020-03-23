@@ -1,6 +1,6 @@
 import React from 'react';
 import {UserContext} from './user-context';
-import {__RouterContext} from 'react-router';
+import {withRouter} from 'react-router';
 import {
 	Route,
 	Redirect
@@ -42,8 +42,7 @@ class BasePrivateRoute extends Route {
 		}
 
 		const {user} = this.props;
-		const {match} = this.props.router;
-		if (match) {
+		if (this.match) {
 			if (user.login) {
 				return super.render();
 			}
@@ -55,18 +54,13 @@ class BasePrivateRoute extends Route {
 	}
 }
 
-// eslint-disable-next-line react/prop-types
+const BasePrivateRouteWithRouter = withRouter(BasePrivateRoute);
+
 const PrivateRoute = ({component: Component, ...rest}) => (
-	// eslint-disable-next-line react/jsx-pascal-case
-	<__RouterContext.Consumer>
-		{router => (
-			<UserContext.Consumer>
-				{({user, setUser}) =>
-					<BasePrivateRoute {...rest} user={user} setUser={setUser} router={router}/>}
-			</UserContext.Consumer>
-		)}
-	</__RouterContext.Consumer>
+	<UserContext.Consumer>
+		{({user, setUser}) =>
+			<BasePrivateRouteWithRouter {...rest} user={user} setUser={setUser}/>}
+	</UserContext.Consumer>
 );
 
 export default PrivateRoute;
-

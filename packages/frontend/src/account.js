@@ -3,7 +3,7 @@ import Alert from 'react-bootstrap/Alert';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import {__RouterContext} from 'react-router';
+import {withRouter} from 'react-router';
 import {UserContext} from './user-context';
 
 class BaseAccount extends React.Component {
@@ -29,15 +29,13 @@ class BaseAccount extends React.Component {
 	}
 }
 
+const BaseAccountWithRouter = withRouter(BaseAccount);
+
 const Account = () => (
-	<__RouterContext.Consumer>
-		{router => (
-			<UserContext.Consumer>
-				{({user, setUser}) =>
-					<BaseAccount user={user} setUser={setUser} router={router}/>}
-			</UserContext.Consumer>
-		)}
-	</__RouterContext.Consumer>
+	<UserContext.Consumer>
+		{({user, setUser}) =>
+			<BaseAccountWithRouter user={user} setUser={setUser}/>}
+	</UserContext.Consumer>
 );
 
 export default Account;
