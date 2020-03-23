@@ -9,3 +9,4 @@ rules:
   react/jsx-pascal-case: warn
   react/require-default-props: off
   react/prop-types: warn
+  camelcase: warn

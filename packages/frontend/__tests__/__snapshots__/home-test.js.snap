@@ -1,56 +1,59 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders home screen with login button 1`] = `
-<div
-  className="container-fluid"
->
+exports[`renders login button if authorize URL can be fetched 1`] = `
+<div>
   <div
-    className="row"
+    className="container-fluid"
   >
     <div
-      className="col"
+      className="row"
     >
       <div
-        className="fade alert alert-success show"
-        role="alert"
+        className="col"
       >
         <div
-          className="alert-heading h4"
+          className="fade alert alert-success show"
+          role="alert"
         >
-          Welcome to flaky.dev
+          <div
+            className="alert-heading h4"
+          >
+            Welcome to flaky.dev
+          </div>
+          <p>
+            Flaky.dev accepts output from your test runs on GitHub, performs statistical analysis, and opens and closes issues for flaky tests.
+          </p>
+          <hr />
+          <p
+            className="mb-0"
+          >
+            Login with GitHub below to get started.
+          </p>
         </div>
-        <p>
-          Flaky.dev accepts output from your test runs on GitHub, performs statistical analysis, and opens and closes issues for flaky tests.
-        </p>
-        <hr />
-        <p
-          className="mb-0"
-        >
-          Login with GitHub below to get started.
-        </p>
       </div>
     </div>
-  </div>
-  <div
-    className="row"
-  >
     <div
-      className="col"
-    />
-    <div
-      className="col"
+      className="row"
     >
-      <button
-        className="btn btn-primary btn-block"
-        disabled={true}
-        type="button"
+      <div
+        className="col"
+      />
+      <div
+        className="col"
       >
-        Loading…
-      </button>
+        <a
+          className="btn btn-primary btn-block"
+          href="http://www.github.com//login/oauth/authorize"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+        >
+          Login with GitHub
+        </a>
+      </div>
+      <div
+        className="col"
+      />
     </div>
-    <div
-      className="col"
-    />
   </div>
 </div>
 `;

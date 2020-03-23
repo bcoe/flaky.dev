@@ -2,7 +2,6 @@ import './css/app.css';
 
 import React from 'react';
 import {
-	BrowserRouter as Router,
 	Switch,
 	Route
 	// Link
@@ -31,21 +30,19 @@ class App extends React.Component {
 	render() {
 		return (
 			<UserContext.Provider value={this.state}>
-				<Router>
-					<div>
-						<Switch>
-							<Route exact path="/">
-								<Home/>
-							</Route>
-							<PrivateRoute exact path="/account" component={Account}>
-								<Account/>
-							</PrivateRoute>
-							<Route exact path="/callback/gh">
-								<LoginCallback/>
-							</Route>
-						</Switch>
-					</div>
-				</Router>
+				<div>
+					<Switch>
+						<Route exact path="/">
+							<Home/>
+						</Route>
+						<PrivateRoute exact path="/account" component={Account}>
+							<Account/>
+						</PrivateRoute>
+						<Route exact path="/callback/gh">
+							<LoginCallback/>
+						</Route>
+					</Switch>
+				</div>
 			</UserContext.Provider>
 		);
 	}

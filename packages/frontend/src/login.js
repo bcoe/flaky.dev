@@ -1,9 +1,7 @@
 import './css/login.css';
-import * as fetch from 'node-fetch';
 import React from 'react';
 import Button from 'react-bootstrap/Button';
-
-const API_URL = process.env.REACT_APP_API_URL;
+import {getAuthorizationUrl} from './api/github';
 
 class Login extends React.Component {
 	constructor(props) {
@@ -14,14 +12,10 @@ class Login extends React.Component {
 	}
 
 	async componentDidMount() {
-		const resp = await fetch(`${API_URL}/login/github`, {
-			credentials: 'include',
-			cache: 'no-cache'
-		});
-		const body = await resp.json();
+		const authorizationUrl = await getAuthorizationUrl();
 		this.setState({
 			loading: false,
-			authorizationUri: body.authorization_uri
+			authorizationUrl
 		});
 	}
 
@@ -30,7 +24,7 @@ class Login extends React.Component {
 			<Button
 				block
 				variant="primary"
-				href={this.state.authorizationUri}
+				href={this.state.authorizationUrl}
 				disabled={this.state.loading}
 			>
 				{this.state.loading ? 'Loading…' : 'Login with GitHub'}

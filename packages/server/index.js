@@ -51,13 +51,13 @@ app.use(session(sess));
 app.get('/login/github', cors(corsOptions), (request, response) => {
 	const state = v4();
 	request.session.state = state;
-	const authorizationUri = oauth2.authorizationCode.authorizeURL({
+	const authorizationUrl = oauth2.authorizationCode.authorizeURL({
 		redirect_uri: callbackUrl,
 		scope: 'repo',
 		state
 	});
 	response.json({
-		authorization_uri: authorizationUri
+		authorization_url: authorizationUrl
 	});
 });
 
