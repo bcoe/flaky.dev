@@ -4,7 +4,7 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import {withRouter} from 'react-router';
-import {UserContext} from './user-context';
+import {UserContext} from './context/user-context';
 
 class BaseAccount extends React.Component {
 	render() {

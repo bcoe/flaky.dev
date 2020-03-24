@@ -1,11 +1,10 @@
 const {Octokit} = require('@octokit/rest');
 
-module.exports = async (accessToken, pool) => {
+module.exports = async (accessToken, client) => {
 	const octokit = new Octokit({
 		auth: accessToken
 	});
 	const user = (await octokit.users.getAuthenticated()).data;
-	const client = await pool.connect();
 	const userQuery = {
 		name: 'fetch-existing-user',
 		text: 'SELECT * FROM users_github WHERE login = $1',

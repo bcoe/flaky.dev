@@ -4,7 +4,7 @@
   "description": "flaky.dev server",
   "main": "index.js",
   "scripts": {
-    "test": "c8 mocha test.js",
+    "test": "c8 mocha --exit --timeout=8000 ./test/*.js",
     "start": "node index.js",
     "lint": "xo",
     "fix": "xo --fix",
@@ -34,12 +34,15 @@
     "express": "^4.17.1",
     "express-session": "^1.17.0",
     "simple-oauth2": "^3.3.0",
-    "uuid": "^7.0.2"
+    "uuid": "^7.0.2",
+    "pg": "^7.18.2"
   },
   "devDependencies": {
+    "c8": "^7.1.0",
     "db-migrate": "^0.11.6",
     "db-migrate-pg": "^1.0.0",
-    "pg": "^7.18.2",
+    "mocha": "^7.1.1",
+    "nock": "^12.0.3",
     "xo": "^0.28.0"
   },
   "xo": {

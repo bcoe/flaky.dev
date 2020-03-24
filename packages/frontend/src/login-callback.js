@@ -1,8 +1,7 @@
-import './css/login.css';
 import * as fetch from 'node-fetch';
 import React from 'react';
 import {withRouter} from 'react-router';
-import {UserContext} from './user-context';
+import {UserContext} from './context/user-context';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1:4000';
 

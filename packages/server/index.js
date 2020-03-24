@@ -82,8 +82,9 @@ app.post('/login/github', cors(corsOptions), async (request, response) => {
 				msg: resp.token.error_description
 			});
 		} else {
+			const client = await pool.connect();
 			try {
-				const user = await upsertGitHubUser(resp.token.access_token, pool);
+				const user = await upsertGitHubUser(resp.token.access_token, client);
 				request.session.user = user;
 				response.json(user);
 			} catch (error) {
@@ -91,6 +92,8 @@ app.post('/login/github', cors(corsOptions), async (request, response) => {
 				response.status(500).json({
 					msg: 'unknown error'
 				});
+			} finally {
+				client.release();
 			}
 		}
 	} else {

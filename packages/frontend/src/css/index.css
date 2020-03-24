@@ -2,3 +2,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.home .header {
+  background-color: black;
+  min-height: 55px;
+  margin-bottom: 10px;
+  font-family: arial;
+  font-size: 22pt;
+  color: white;
+  padding: 8px 4px 4px 4px;
+}

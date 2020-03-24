@@ -1,4 +1,3 @@
-import './css/login.css';
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import {getAuthorizationUrl} from './api/github';
@@ -27,7 +26,7 @@ class Login extends React.Component {
 				href={this.state.authorizationUrl}
 				disabled={this.state.loading}
 			>
-				{this.state.loading ? 'Loading…' : 'Login with GitHub'}
+				{this.state.loading ? 'Loading…' : this.props.text}
 			</Button>
 		);
 	}
