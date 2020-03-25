@@ -10,6 +10,10 @@ const PGSession = require('connect-pg-simple')(session);
 const dbSettings = require('./database')[process.env.NODE_ENV || 'development'];
 const pool = new pg.Pool(dbSettings);
 const {v4} = require('uuid');
+const pino = require('pino');
+const logger = pino({
+	level: process.env.LOG_LEVEL ? Number(process.env.LOG_LEVEL) : 'info'
+});
 
 const upsertGitHubUser = require('./lib/upsert-github-user');
 
@@ -88,7 +92,7 @@ app.post('/login/github', cors(corsOptions), async (request, response) => {
 				request.session.user = user;
 				response.json(user);
 			} catch (error) {
-				console.error(error.stack);
+				logger.error(error.stack);
 				response.status(500).json({
 					msg: 'unknown error'
 				});
@@ -103,4 +107,4 @@ app.post('/login/github', cors(corsOptions), async (request, response) => {
 	}
 });
 
-app.listen(port, () => console.log(`listening on port ${port}`));
+app.listen(port, () => logger.info(`listening on port ${port}`));

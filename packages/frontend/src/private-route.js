@@ -25,11 +25,11 @@ class BasePrivateRoute extends Route {
 				console.info(error.code);
 				this.props.setError({
 					msg: 'could not find a user session, please login or create an account'
-				})
+				});
 			} else {
 				this.props.setError({
 					msg: 'an unexpected error occurred'
-				})
+				});
 			}
 
 			this.props.setUser({});
@@ -66,11 +66,12 @@ const BasePrivateRouteWithRouter = withRouter(BasePrivateRoute);
 
 const PrivateRoute = ({component: Component, ...rest}) => (
 	<ErrorContext.Consumer>
-		{({setError}) =>
+		{({setError}) => (
 			<UserContext.Consumer>
 				{({user, setUser}) =>
 					<BasePrivateRouteWithRouter {...rest} user={user} setUser={setUser} setError={setError}/>}
-			</UserContext.Consumer>}
+			</UserContext.Consumer>
+		)}
 	</ErrorContext.Consumer>
 );
 

@@ -7,26 +7,28 @@ import Login from './login';
 import {ErrorContext} from './context/error-context';
 
 class BaseHome extends React.Component {
-	render () {
+	render() {
 		return (
-			<Container className="home" fluid>
+			<Container fluid className="home">
 				<Row className="header">
 					<Col md={10}>flaky.dev</Col>
 					<Col>
-						<Login text="Login with GitHub" />
+						<Login text="Login with GitHub"/>
 					</Col>
 				</Row>
 				{(() => {
 					if (this.props.error.msg) {
-						return (<Row>
-							<Col md={{ span: 6, offset: 3 }}>
-								<Alert variant={'danger'}>{this.props.error.msg}</Alert>
-							</Col>
-						</Row>)
+						return (
+							<Row>
+								<Col md={{span: 6, offset: 3}}>
+									<Alert variant="danger">{this.props.error.msg}</Alert>
+								</Col>
+							</Row>
+						);
 					}
-	      })()}
+				})()}
 				<Row>
-					<Col md={{ span: 6, offset: 2 }}>
+					<Col md={{span: 6, offset: 2}}>
 						<h1>Stop wrestling with flaky tests</h1>
 						<p>
 							flaky.dev collects information from your tests runs, performs
@@ -35,21 +37,20 @@ class BaseHome extends React.Component {
 					</Col>
 				</Row>
 				<Row>
-					<Col md={3}>
-					</Col>
+					<Col md={3}/>
 					<Col md={6}>
-						<Login text="Create an Account" />
+						<Login text="Create an Account"/>
 					</Col>
 				</Row>
 			</Container>
 		);
 	}
-};
+}
 
 const Home = () => (
 	<ErrorContext.Consumer>
 		{({error}) =>
-			<BaseHome error={error} />}
+			<BaseHome error={error}/>}
 	</ErrorContext.Consumer>
 );
 
