@@ -36,6 +36,8 @@ jobs:
           # use postgres for the host here because we have specified a container for the job.
           # If we were running the job on the VM this would be localhost
           POSTGRES_HOST: localhost
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
           POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
       - run: npm test
         working-directory: ./packages/server
@@ -43,4 +45,6 @@ jobs:
           # use postgres for the host here because we have specified a container for the job.
           # If we were running the job on the VM this would be localhost
           POSTGRES_HOST: localhost
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
           POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
