@@ -39,3 +39,19 @@ jobs:
           POSTGRES_PASSWORD: postgres
           POSTGRES_USER: postgres
           POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
+  frontend-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [12]
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+      - run: node --version
+        working-directory: ./packages/frontend
+      - run: npm install
+        working-directory: ./packages/frontend
+      - run: npm test
+        working-directory: ./packages/frontend
