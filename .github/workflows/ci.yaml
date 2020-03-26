@@ -27,18 +27,18 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - run: node --version
-        working-directory: ./packages/frontend
+        working-directory: ./packages/server
       - run: npm install
-        working-directory: ./packages/frontend
+        working-directory: ./packages/server
       - run: npm run migrate:up
-        working-directory: ./packages/frontend
+        working-directory: ./packages/server
         env:
           # use postgres for the host here because we have specified a container for the job.
           # If we were running the job on the VM this would be localhost
           POSTGRES_HOST: postgres
           POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
       - run: npm test
-        working-directory: ./packages/frontend
+        working-directory: ./packages/server
         env:
           # use postgres for the host here because we have specified a container for the job.
           # If we were running the job on the VM this would be localhost
