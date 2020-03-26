@@ -3,41 +3,16 @@
 exports[`renders login button if authorize URL can be fetched 1`] = `
 <div>
   <div
-    className="container-fluid"
+    className="home container-fluid"
   >
     <div
-      className="row"
+      className="header row"
     >
       <div
-        className="col"
+        className="col-md-10"
       >
-        <div
-          className="fade alert alert-success show"
-          role="alert"
-        >
-          <div
-            className="alert-heading h4"
-          >
-            Welcome to flaky.dev
-          </div>
-          <p>
-            Flaky.dev accepts output from your test runs on GitHub, performs statistical analysis, and opens and closes issues for flaky tests.
-          </p>
-          <hr />
-          <p
-            className="mb-0"
-          >
-            Login with GitHub below to get started.
-          </p>
-        </div>
+        flaky.dev
       </div>
-    </div>
-    <div
-      className="row"
-    >
-      <div
-        className="col"
-      />
       <div
         className="col"
       >
@@ -50,9 +25,39 @@ exports[`renders login button if authorize URL can be fetched 1`] = `
           Login with GitHub
         </a>
       </div>
+    </div>
+    <div
+      className="row"
+    >
       <div
-        className="col"
+        className="col-md-6 offset-md-2"
+      >
+        <h1>
+          Stop wrestling with flaky tests
+        </h1>
+        <p>
+          flaky.dev collects information from your tests runs, performs statistical analysis, and helps you keep on top of failing tests.
+        </p>
+      </div>
+    </div>
+    <div
+      className="row"
+    >
+      <div
+        className="col-md-3"
       />
+      <div
+        className="col-md-6"
+      >
+        <a
+          className="btn btn-primary btn-block"
+          href="http://www.github.com//login/oauth/authorize"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+        >
+          Create an Account
+        </a>
+      </div>
     </div>
   </div>
 </div>
