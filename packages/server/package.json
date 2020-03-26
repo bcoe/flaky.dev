@@ -4,7 +4,7 @@
   "description": "flaky.dev server",
   "main": "index.js",
   "scripts": {
-    "test": "c8 mocha --exit --timeout=8000 ./test/*.js",
+    "test": "POSTGRES_DB=flaky_dev_test c8 mocha --exit --timeout=8000 ./test/*.js",
     "start": "node index.js",
     "lint": "xo",
     "fix": "xo --fix",

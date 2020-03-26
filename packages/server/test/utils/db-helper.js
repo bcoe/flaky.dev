@@ -2,10 +2,10 @@ process.env.DATABASE = 'flaky_dev_test';
 
 const {Client} = require('pg');
 const client = new Client({
-	user: process.env.DB_USER || process.env.USER,
-	port: process.env.DB_PORT ? Number(process.env.DB_PORT) : 5432,
-	host: process.env.DB_HOST || 'localhost',
-	database: process.env.DATABASE
+	user: process.env.POSTGRES_USER || process.env.POSTGRES_USER,
+	port: process.env.POSTGRES_PORT ? Number(process.env.POSTGRES_PORT) : 5432,
+	host: process.env.POSTGRES_HOST || 'localhost',
+	database: process.env.POSTGRES_DB
 });
 
 const {execSync} = require('child_process');
