@@ -10,6 +10,10 @@ const PGSession = require('connect-pg-simple')(session);
 const dbSettings = require('./database')[process.env.NODE_ENV || 'development'];
 const pool = new pg.Pool(dbSettings);
 const {v4} = require('uuid');
+const pino = require('pino');
+const logger = pino({
+	level: process.env.LOG_LEVEL ? Number(process.env.LOG_LEVEL) : 'info'
+});
 
 const upsertGitHubUser = require('./lib/upsert-github-user');
 
@@ -51,13 +55,13 @@ app.use(session(sess));
 app.get('/login/github', cors(corsOptions), (request, response) => {
 	const state = v4();
 	request.session.state = state;
-	const authorizationUri = oauth2.authorizationCode.authorizeURL({
+	const authorizationUrl = oauth2.authorizationCode.authorizeURL({
 		redirect_uri: callbackUrl,
 		scope: 'repo',
 		state
 	});
 	response.json({
-		authorization_uri: authorizationUri
+		authorization_url: authorizationUrl
 	});
 });
 
@@ -82,15 +86,18 @@ app.post('/login/github', cors(corsOptions), async (request, response) => {
 				msg: resp.token.error_description
 			});
 		} else {
+			const client = await pool.connect();
 			try {
-				const user = await upsertGitHubUser(resp.token.access_token, pool);
+				const user = await upsertGitHubUser(resp.token.access_token, client);
 				request.session.user = user;
 				response.json(user);
 			} catch (error) {
-				console.error(error.stack);
+				logger.error(error.stack);
 				response.status(500).json({
 					msg: 'unknown error'
 				});
+			} finally {
+				client.release();
 			}
 		}
 	} else {
@@ -100,4 +107,4 @@ app.post('/login/github', cors(corsOptions), async (request, response) => {
 	}
 });
 
-app.listen(port, () => console.log(`listening on port ${port}`));
+app.listen(port, () => logger.info(`listening on port ${port}`));

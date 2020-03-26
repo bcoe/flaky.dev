@@ -1,56 +1,64 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders home screen with login button 1`] = `
-<div
-  className="container-fluid"
->
+exports[`renders login button if authorize URL can be fetched 1`] = `
+<div>
   <div
-    className="row"
+    className="home container-fluid"
   >
     <div
-      className="col"
+      className="header row"
     >
       <div
-        className="fade alert alert-success show"
-        role="alert"
+        className="col-md-10"
       >
-        <div
-          className="alert-heading h4"
+        flaky.dev
+      </div>
+      <div
+        className="col"
+      >
+        <a
+          className="btn btn-primary btn-block"
+          href="http://www.github.com//login/oauth/authorize"
+          onClick={[Function]}
+          onKeyDown={[Function]}
         >
-          Welcome to flaky.dev
-        </div>
+          Login with GitHub
+        </a>
+      </div>
+    </div>
+    <div
+      className="row"
+    >
+      <div
+        className="col-md-6 offset-md-2"
+      >
+        <h1>
+          Stop wrestling with flaky tests
+        </h1>
         <p>
-          Flaky.dev accepts output from your test runs on GitHub, performs statistical analysis, and opens and closes issues for flaky tests.
-        </p>
-        <hr />
-        <p
-          className="mb-0"
-        >
-          Login with GitHub below to get started.
+          flaky.dev collects information from your tests runs, performs statistical analysis, and helps you keep on top of failing tests.
         </p>
       </div>
     </div>
-  </div>
-  <div
-    className="row"
-  >
     <div
-      className="col"
-    />
-    <div
-      className="col"
+      className="row"
     >
-      <button
-        className="btn btn-primary btn-block"
-        disabled={true}
-        type="button"
+      <div
+        className="col-md-3"
+      />
+      <div
+        className="col-md-6"
       >
-        Loading…
-      </button>
+        <a
+          className="btn btn-primary btn-block"
+          href="http://www.github.com//login/oauth/authorize"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+        >
+          Create an Account
+        </a>
+      </div>
     </div>
-    <div
-      className="col"
-    />
   </div>
 </div>
 `;

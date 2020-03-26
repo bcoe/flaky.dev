@@ -1,13 +1,12 @@
 import React from 'react';
-import {UserContext} from './user-context';
-import * as fetch from 'node-fetch';
-import {__RouterContext} from 'react-router';
+import {UserContext} from './context/user-context';
+import {withRouter} from 'react-router';
 import {
 	Route,
 	Redirect
 } from 'react-router-dom';
-
-const API_URL = process.env.REACT_APP_API_URL;
+import {getUserSession} from './api/account';
+import {ErrorContext} from './context/error-context';
 
 class BasePrivateRoute extends Route {
 	constructor(props) {
@@ -18,19 +17,29 @@ class BasePrivateRoute extends Route {
 	}
 
 	async componentDidMount() {
-		const resp = await fetch(`${API_URL}/user`, {
-			credentials: 'include',
-			cache: 'no-cache'
-		});
-		if (resp.status === 200) {
-			const user = await resp.json();
+		try {
+			const user = await getUserSession();
 			this.props.setUser(user);
-			this.setState(() => {
-				return {
-					loading: false
-				};
-			});
+		} catch (error) {
+			if (error.code === 404) {
+				console.info(error.code);
+				this.props.setError({
+					msg: 'could not find a user session, please login or create an account'
+				});
+			} else {
+				this.props.setError({
+					msg: 'an unexpected error occurred'
+				});
+			}
+
+			this.props.setUser({});
 		}
+
+		this.setState(() => {
+			return {
+				loading: false
+			};
+		});
 	}
 
 	render() {
@@ -41,8 +50,7 @@ class BasePrivateRoute extends Route {
 		}
 
 		const {user} = this.props;
-		const {match} = this.props.router;
-		if (match) {
+		if (this.props.match) {
 			if (user.login) {
 				return super.render();
 			}
@@ -54,18 +62,17 @@ class BasePrivateRoute extends Route {
 	}
 }
 
-// eslint-disable-next-line react/prop-types
+const BasePrivateRouteWithRouter = withRouter(BasePrivateRoute);
+
 const PrivateRoute = ({component: Component, ...rest}) => (
-	// eslint-disable-next-line react/jsx-pascal-case
-	<__RouterContext.Consumer>
-		{router => (
+	<ErrorContext.Consumer>
+		{({setError}) => (
 			<UserContext.Consumer>
 				{({user, setUser}) =>
-					<BasePrivateRoute {...rest} user={user} setUser={setUser} router={router}/>}
+					<BasePrivateRouteWithRouter {...rest} user={user} setUser={setUser} setError={setError}/>}
 			</UserContext.Consumer>
 		)}
-	</__RouterContext.Consumer>
+	</ErrorContext.Consumer>
 );
 
 export default PrivateRoute;
-

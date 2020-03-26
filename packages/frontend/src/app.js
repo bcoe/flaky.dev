@@ -1,27 +1,32 @@
-import './css/app.css';
-
 import React from 'react';
 import {
-	BrowserRouter as Router,
 	Switch,
 	Route
-	// Link
 } from 'react-router-dom';
 import Home from './home';
 import Account from './account';
 import LoginCallback from './login-callback';
 import PrivateRoute from './private-route';
-import {UserContext} from './user-context';
+import {UserContext} from './context/user-context';
+import {ErrorContext} from './context/error-context';
 
 class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			user: {authenticated: false},
+			user: {},
 			setUser: user => {
 				this.setState(() => {
 					return {
 						user
+					};
+				});
+			},
+			error: {},
+			setError: error => {
+				this.setState(() => {
+					return {
+						error
 					};
 				});
 			}
@@ -30,8 +35,8 @@ class App extends React.Component {
 
 	render() {
 		return (
-			<UserContext.Provider value={this.state}>
-				<Router>
+			<ErrorContext.Provider value={this.state}>
+				<UserContext.Provider value={this.state}>
 					<div>
 						<Switch>
 							<Route exact path="/">
@@ -45,8 +50,8 @@ class App extends React.Component {
 							</Route>
 						</Switch>
 					</div>
-				</Router>
-			</UserContext.Provider>
+				</UserContext.Provider>
+			</ErrorContext.Provider>
 		);
 	}
 }

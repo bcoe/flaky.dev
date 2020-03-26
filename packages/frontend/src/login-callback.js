@@ -1,14 +1,13 @@
-import './css/login.css';
 import * as fetch from 'node-fetch';
 import React from 'react';
-import {__RouterContext} from 'react-router';
-import {UserContext} from './user-context';
+import {withRouter} from 'react-router';
+import {UserContext} from './context/user-context';
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1:4000';
 
 class BaseLoginCallback extends React.Component {
 	async componentDidMount() {
-		const parameters = new URLSearchParams(this.props.router.location.search);
+		const parameters = new URLSearchParams(this.props.location.search);
 		const resp = await fetch(`${API_URL}/login/github`, {
 			method: 'POST',
 			credentials: 'include',
@@ -24,9 +23,9 @@ class BaseLoginCallback extends React.Component {
 		if (resp.status === 200) {
 			const user = await resp.json();
 			this.props.setUser(user);
-			this.props.router.history.push('/account');
+			this.props.history.push('/account');
 		} else {
-			this.props.router.history.push('/');
+			this.props.history.push('/');
 		}
 	}
 
@@ -37,15 +36,13 @@ class BaseLoginCallback extends React.Component {
 	}
 }
 
+const BaseLoginCallbackWithRouter = withRouter(BaseLoginCallback);
+
 const LoginCallback = () => (
-	<__RouterContext.Consumer>
-		{router => (
-			<UserContext.Consumer>
-				{({user, setUser}) =>
-					<BaseLoginCallback user={user} setUser={setUser} router={router}/>}
-			</UserContext.Consumer>
-		)}
-	</__RouterContext.Consumer>
+	<UserContext.Consumer>
+		{({user, setUser}) =>
+			<BaseLoginCallbackWithRouter user={user} setUser={setUser}/>}
+	</UserContext.Consumer>
 );
 
 export default LoginCallback;
