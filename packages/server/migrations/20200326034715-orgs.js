@@ -2,9 +2,9 @@
 
 exports.up = async function (db) {
 	await db.createTable('orgs_github', {
-		name: {type: 'varchar(128)', primaryKey: true},
-		company: {type: 'varchar(256)'},
-		avatar_url: {type: 'varchar(512)'}
+		name: {type: 'text', primaryKey: true},
+		company: {type: 'text'},
+		avatar_url: {type: 'text'}
 	});
 };
 

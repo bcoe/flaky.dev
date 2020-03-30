@@ -2,12 +2,13 @@
 
 exports.up = async function (db) {
 	await db.createTable('users_github', {
-		login: {type: 'varchar(128)', primaryKey: true},
-		email: {type: 'varchar(320)'},
-		name: {type: 'varchar(256)'},
-		avatar_url: {type: 'varchar(512)'},
-		access_token: {type: 'varchar(256)'}
+		login: {type: 'text', primaryKey: true},
+		email: {type: 'text'},
+		name: {type: 'text'},
+		avatar_url: {type: 'text'},
+		access_token: {type: 'text'}
 	});
+	await db.addIndex('users_github', 'access_token_idx', ['access_token'], true);
 };
 
 exports.down = async function (db) {

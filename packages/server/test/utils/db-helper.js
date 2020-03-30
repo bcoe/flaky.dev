@@ -13,7 +13,6 @@ if (process.env.POSTGRES_PASSWORD) {
 
 const client = new Client(dbSettings);
 const {execSync} = require('child_process');
-
 const output = execSync('npm run migrate:up');
 console.info(output.toString('utf8'));
 
