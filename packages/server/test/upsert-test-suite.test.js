@@ -1,7 +1,7 @@
 
 const {beforeEach, afterEach, describe, it} = require('mocha');
 const {client, before, after} = require('./utils/db-helper');
-const {expect} = require('chai');
+// Const {expect} = require('chai');
 const nock = require('nock');
 const xml2js = require('xml2js');
 const parser = new xml2js.Parser();
@@ -29,9 +29,11 @@ describe('upsertTestSuite', () => {
 	});
 
 	it('populates all test cases and suite, the first time they are observed', async () => {
-		const xml = readFileSync(require.resolve('./fixtures/yargs-tests-some-failures.xml'), 'utf8');
-		const xml2 = readFileSync(require.resolve('./fixtures/yargs-tests-all-green.xml'), 'utf8');
+		const xml = readFileSync(require.resolve('./fixtures/yargs-tests-all-green.xml'), 'utf8');
 		await upsertTestSuite('bcoe/yargs', await parser.parseStringPromise(xml), client);
-		await upsertTestSuite('bcoe/yargs',  await parser.parseStringPromise(xml2), client);
 	});
+
+	// TODO: add test case for the multiple suite format (like tap-xunit).
+	// TODO: figure out data structure for tracking flakiness (perhaps we
+	// could use an array of failures and successes)?
 });

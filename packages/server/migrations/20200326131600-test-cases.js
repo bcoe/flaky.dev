@@ -11,7 +11,7 @@ exports.up = async function (db) {
 		failure_message: {type: 'text'},
 		last_run_time: {type: 'decimal'},
 		flaky: {type: 'boolean', defaultValue: false},
-		failing: {type: 'boolean', defaultValue: false},
+		failing: {type: 'boolean', defaultValue: false}
 	});
 	await db.addForeignKey('test_cases', 'repos_github', 'test_cases_repos_github_fk', {
 		repo_full_name: 'full_name'
