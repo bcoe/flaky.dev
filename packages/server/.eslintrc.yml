@@ -2,3 +2,4 @@
 rules:
   camelcase: warn
   no-await-in-loop: off
+  unicorn/string-content: off

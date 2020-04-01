@@ -4,6 +4,9 @@ const logger = pino({
 	level: process.env.LOG_LEVEL ? Number(process.env.LOG_LEVEL) : 'info'
 });
 const {noTestSuiteError, noTestCasesError} = require('./errors');
+// Be mindful updating this value, as it will potentially result int
+// modifying the amount of historical test-run information:
+const MAX_TEST_RUNS = 100;
 
 // There's no collision concerns, so we're opting for a
 // fast algorithm when hashing the key:
@@ -37,12 +40,13 @@ function buildInsertStatement(repoFullName, testSuiteObject) {
 
 		/*
 		Repo_full_name, suite, classname, name, success, failure,
-		last_run_time, failing
+		last_run_time, failing, successes, failures
 		*/
 		insertStrings.push(`($${index++}, $${index++}, $${index++}, $${index++},
-			$${index++}, $${index++}, $${index++}, $${index++}, $${index++})`);
+			$${index++}, $${index++}, $${index++}, $${index++}, $${index++}, $${index++})`);
 		values.push(repoFullName, suiteName, className, testName, success, failure,
-			failureMessage, lastRunTime, Boolean(failure));
+			failureMessage, lastRunTime, Boolean(failure),
+			[`(${success ? '"success"' : 'failure'}, "now()", ${lastRunTime})`]);
 	}
 
 	return {values, insertString: `${insertStrings.join(', ')}`};
@@ -72,7 +76,7 @@ module.exports = async function upsertTestSuite(repoFullName, testSuiteObject, c
 	await client.query({
 		text: `INSERT INTO  test_cases(
 			repo_full_name, suite, classname, name, success, failure, failure_message,
-			last_run_time, failing
+			last_run_time, failing, runs
 		)  VALUES ${insertString}
 		ON CONFLICT (repo_full_name, suite, classname, name)
 		DO UPDATE
@@ -81,7 +85,8 @@ module.exports = async function upsertTestSuite(repoFullName, testSuiteObject, c
 				failure = test_cases.failure + EXCLUDED.failure,
 				failing = EXCLUDED.failing,
 				failure_message = EXCLUDED.failure_message,
-				last_run_time = EXCLUDED.last_run_time
+				last_run_time = EXCLUDED.last_run_time,
+				runs = (EXCLUDED.runs || test_cases.runs[1:${MAX_TEST_RUNS}])
 			WHERE 
 				test_cases.repo_full_name = EXCLUDED.repo_full_name AND
 				test_cases.suite = EXCLUDED.suite AND

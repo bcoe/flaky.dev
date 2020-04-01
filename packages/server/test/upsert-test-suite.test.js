@@ -36,4 +36,7 @@ describe('upsertTestSuite', () => {
 	// TODO: add test case for the multiple suite format (like tap-xunit).
 	// TODO: figure out data structure for tracking flakiness (perhaps we
 	// could use an array of failures and successes)?
+
+	// TODO: think about how we track an issue that we've opened on GitHub
+	// this ID needs to be stored somewhere.
 });
