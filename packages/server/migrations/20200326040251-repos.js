@@ -2,14 +2,15 @@
 
 exports.up = async function (db) {
 	await db.createTable('repos_github', {
-		full_name: {type: 'varchar(140)', primaryKey: true},
-		owner: {type: 'varchar(128)', notNull: true}
+		full_name: {type: 'text', primaryKey: true},
+		user: {type: 'text'},
+		org: {type: 'text'}
 	});
-	await db.addForeignKey('repos_github', 'users_github', 'repos_users_github_login_fk', {
-		owner: 'login'
+	await db.addForeignKey('repos_github', 'users_github', 'repos_users_github_user_fk', {
+		user: 'login'
 	}, {onDelete: 'CASCADE'});
-	await db.addForeignKey('repos_github', 'orgs_github', 'repos_orgs_github_name_fk', {
-		owner: 'name'
+	await db.addForeignKey('repos_github', 'orgs_github', 'repos_orgs_github_org_fk', {
+		org: 'name'
 	}, {onDelete: 'CASCADE'});
 };
 

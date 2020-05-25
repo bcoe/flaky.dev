@@ -2,9 +2,9 @@
 
 exports.up = async function (db) {
 	await db.createTable('session', {
-		sid: {type: 'varchar', primaryKey: true},
+		sid: {type: 'text', primaryKey: true},
 		sess: {type: 'json', notNull: true},
-		expire: {type: 'timestamp(6)', notNull: true}
+		expire: {type: 'timestamp', notNull: true}
 	});
 };
 
